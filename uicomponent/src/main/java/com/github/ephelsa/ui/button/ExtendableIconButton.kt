@@ -36,53 +36,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.github.ephelsa.ui.R
-
-@Composable
-fun SimpleIconButton(
-    imageVector: ImageVector,
-    contentDescription: String?,
-    fillBackground: Boolean,
-    size: Dp = 50.dp,
-    enabled: Boolean = true,
-    backgroundColor: Color = MaterialTheme.colors.primary,
-    iconColor: Color = if (isSystemInDarkTheme()) Color.LightGray else Color.DarkGray,
-    onClick: () -> Unit
-) {
-    Box(
-        modifier = Modifier
-            .size(size)
-            .background(
-                color = if (fillBackground) backgroundColor else Color.Transparent,
-                shape = MaterialTheme.shapes.small
-            )
-            .clickable(
-                enabled = enabled,
-                onClick = onClick
-            )
-            .padding(12.dp)
-    ) {
-        Icon(
-            imageVector = imageVector,
-            contentDescription = contentDescription,
-            modifier = Modifier
-                .fillMaxSize(),
-            tint = if (fillBackground) MaterialTheme.colors.surface else iconColor
-        )
-    }
-}
-
-@Preview
-@Composable
-internal fun SimpleIconButtonPreview() {
-    SimpleIconButton(
-        imageVector = ImageVector.vectorResource(id = R.drawable.ic_tune),
-        contentDescription = "Settings",
-        fillBackground = true,
-    ) {
-
-    }
-}
+import com.github.ephelsa.ui.theme.PinkSwan
 
 @ExperimentalAnimationApi
 @Composable
@@ -90,7 +46,7 @@ fun ExtendableIconButton(
     imageVector: ImageVector,
     text: String,
     isExtended: Boolean = false,
-    iconColor: Color = if (isSystemInDarkTheme()) Color.White else Color.LightGray,
+    iconColor: Color = PinkSwan,
     onClick: () -> Unit
 ) {
     val (isExtend, setExtend) = remember { mutableStateOf(isExtended) }
@@ -129,7 +85,7 @@ fun ExtendableIconButton(
         ) {
             Text(
                 text = text,
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.button,
                 color = MaterialTheme.colors.primary
             )
         }
