@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
 }
 
@@ -7,16 +7,12 @@ android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "com.github.ephelsa.composefooddelivery"
         minSdk 26
         targetSdk 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary true
-        }
     }
 
     buildTypes {
@@ -47,17 +43,11 @@ android {
 }
 
 dependencies {
-    implementation project(':uicomponent')
+    api dependency.compose.ui
+    api dependency.compose.material
+    api dependency.compose.preview
 
-    implementation dependency.androidX.coreKtx
-    implementation dependency.androidX.appcompat
-    implementation dependency.thirdParty.googleMaterial
-    implementation dependency.androidX.lifecycleRuntime
-    implementation dependency.androidX.composeActivity
-
-    testImplementation dependency.thirdParty.junit
-    androidTestImplementation dependency.androidX.junit
-    androidTestImplementation dependency.androidX.espressoCore
     androidTestImplementation dependency.compose.junit
+
     debugImplementation dependency.compose.tooling
 }

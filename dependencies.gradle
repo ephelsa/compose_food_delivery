@@ -24,7 +24,7 @@ def dependency = [
                 appcompat       : "androidx.appcompat:appcompat:$libVersion.androidX.appcompat",
                 composeActivity : "androidx.activity:activity-compose:$libVersion.androidX.composeActivity",
                 lifecycleRuntime: "androidx.lifecycle:lifecycle-runtime-ktx:$libVersion.androidX.lifecycle",
-                junit           : "androidx.test.ext:$libVersion.androidX.junit",
+                junit           : "androidx.test.ext:junit$libVersion.androidX.junit",
                 espressoCore    : "androidx.test.espresso:espresso-core:$libVersion.androidX.espressoCore"
         ],
 
