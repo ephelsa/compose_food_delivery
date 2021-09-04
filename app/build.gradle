@@ -53,7 +53,6 @@ dependencies {
     implementation dependency.androidX.appcompat
     implementation dependency.thirdParty.googleMaterial
     implementation dependency.androidX.lifecycleRuntime
-    implementation dependency.androidX.composeActivity
 
     testImplementation dependency.thirdParty.junit
     androidTestImplementation dependency.androidX.junit
