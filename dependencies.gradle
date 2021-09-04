@@ -13,6 +13,10 @@ def libVersion = [
                 navigation: '2.4.0-alpha08'
         ],
 
+        hilt      : [
+                root: '2.28-alpha'
+        ],
+
         thirdParty: [
                 googleMaterial: '1.4.0',
                 junit         : '4.13.2'
@@ -24,7 +28,7 @@ def dependency = [
                 coreKtx         : "androidx.core:core-ktx:$libVersion.androidX.coreKtx",
                 appcompat       : "androidx.appcompat:appcompat:$libVersion.androidX.appcompat",
                 lifecycleRuntime: "androidx.lifecycle:lifecycle-runtime-ktx:$libVersion.androidX.lifecycle",
-                junit           : "androidx.test.ext:junit$libVersion.androidX.junit",
+                junit           : "androidx.test.ext:junit:$libVersion.androidX.junit",
                 espressoCore    : "androidx.test.espresso:espresso-core:$libVersion.androidX.espressoCore"
         ],
 
@@ -36,6 +40,11 @@ def dependency = [
                 navigation: "androidx.navigation:navigation-compose:$libVersion.compose.navigation",
                 junit     : "androidx.compose.ui:ui-test-junit4:$libVersion.compose.root",
                 tooling   : "androidx.compose.ui:ui-tooling:$libVersion.compose.root"
+        ],
+
+        hilt : [
+                implementation : "com.google.dagger:hilt-android:$libVersion.hilt.root",
+                kapt : "com.google.dagger:hilt-android-compiler:$libVersion.hilt.root"
         ],
 
         thirdParty: [

@@ -1,10 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.github.ephelsa.composefooddelivery"
@@ -53,6 +55,8 @@ dependencies {
     implementation dependency.androidX.appcompat
     implementation dependency.thirdParty.googleMaterial
     implementation dependency.androidX.lifecycleRuntime
+    implementation dependency.hilt.implementation
+    kapt dependency.hilt.kapt
 
     testImplementation dependency.thirdParty.junit
     androidTestImplementation dependency.androidX.junit
