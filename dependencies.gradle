@@ -1,15 +1,16 @@
 def libVersion = [
         androidX  : [
-                coreKtx        : '1.6.0',
-                appcompat      : '1.3.1',
-                composeActivity: '1.3.1',
-                lifecycle      : '2.3.1',
-                junit          : '1.1.3',
-                espressoCore   : '3.4.0',
+                coreKtx     : '1.6.0',
+                appcompat   : '1.3.1',
+                lifecycle   : '2.3.1',
+                junit       : '1.1.3',
+                espressoCore: '3.4.0',
         ],
 
         compose   : [
-                root: '1.0.1',
+                root      : '1.0.1',
+                activity  : '1.3.1',
+                navigation: '2.4.0-alpha08'
         ],
 
         thirdParty: [
@@ -22,18 +23,19 @@ def dependency = [
         androidX  : [
                 coreKtx         : "androidx.core:core-ktx:$libVersion.androidX.coreKtx",
                 appcompat       : "androidx.appcompat:appcompat:$libVersion.androidX.appcompat",
-                composeActivity : "androidx.activity:activity-compose:$libVersion.androidX.composeActivity",
                 lifecycleRuntime: "androidx.lifecycle:lifecycle-runtime-ktx:$libVersion.androidX.lifecycle",
                 junit           : "androidx.test.ext:junit$libVersion.androidX.junit",
                 espressoCore    : "androidx.test.espresso:espresso-core:$libVersion.androidX.espressoCore"
         ],
 
         compose   : [
-                ui      : "androidx.compose.ui:ui:$libVersion.compose.root",
-                material: "androidx.compose.material:material:$libVersion.compose.root",
-                preview : "androidx.compose.ui:ui-tooling-preview:$libVersion.compose.root",
-                junit   : "androidx.compose.ui:ui-test-junit4:$libVersion.compose.root",
-                tooling : "androidx.compose.ui:ui-tooling:$libVersion.compose.root"
+                ui        : "androidx.compose.ui:ui:$libVersion.compose.root",
+                material  : "androidx.compose.material:material:$libVersion.compose.root",
+                preview   : "androidx.compose.ui:ui-tooling-preview:$libVersion.compose.root",
+                activity  : "androidx.activity:activity-compose:$libVersion.compose.activity",
+                navigation: "androidx.navigation:navigation-compose:$libVersion.compose.navigation",
+                junit     : "androidx.compose.ui:ui-test-junit4:$libVersion.compose.root",
+                tooling   : "androidx.compose.ui:ui-tooling:$libVersion.compose.root"
         ],
 
         thirdParty: [

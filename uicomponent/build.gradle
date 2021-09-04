@@ -46,7 +46,8 @@ dependencies {
     api dependency.compose.ui
     api dependency.compose.material
     api dependency.compose.preview
-    api dependency.androidX.composeActivity
+    api dependency.compose.activity
+    api dependency.compose.navigation
 
     androidTestImplementation dependency.compose.junit
 
