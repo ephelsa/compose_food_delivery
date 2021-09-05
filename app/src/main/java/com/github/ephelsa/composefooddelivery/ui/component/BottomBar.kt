@@ -23,9 +23,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.github.ephelsa.composefooddelivery.ComposeFoodDeliveryScreen
 import com.github.ephelsa.ui.button.ExtendableIconButton
-import com.github.ephelsa.ui.theme.ExtraLargeSpacing
 import com.github.ephelsa.ui.theme.GreenWhite
 import com.github.ephelsa.ui.theme.LargeSpacing
+
+private val ToolbarHeight = 100.dp
 
 @ExperimentalAnimationApi
 @Composable
@@ -37,7 +38,7 @@ fun NavigationFoodDeliveryBottomBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(100.dp)
+            .height(ToolbarHeight)
             .padding(bottom = LargeSpacing)
             .background(
                 brush = Brush.verticalGradient(
@@ -59,7 +60,7 @@ private fun BottomLimit() {
     Spacer(
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp)
+            .height((ToolbarHeight.value / 2).dp)
             .clip(
                 MaterialTheme
                     .shapes
