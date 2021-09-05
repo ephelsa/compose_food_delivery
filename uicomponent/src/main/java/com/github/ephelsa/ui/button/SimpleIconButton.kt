@@ -27,6 +27,7 @@ fun SimpleIconButton(
     contentDescription: String?,
     fillBackground: Boolean,
     size: Dp = 50.dp,
+    paddingIcon: Dp = 12.dp,
     enabled: Boolean = true,
     backgroundColor: Color = MaterialTheme.colors.primary,
     iconColor: Color = PinkSwan,
@@ -44,7 +45,7 @@ fun SimpleIconButton(
                 onClick = onClick,
                 role = Role.Button
             )
-            .padding(12.dp)
+            .padding(paddingIcon)
     ) {
         Icon(
             imageVector = imageVector,
