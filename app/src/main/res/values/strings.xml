@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Compose Food Delivery</string>
+
+    <string name="bottomBarOption_home">Home</string>
+    <string name="bottomBarOption_favorites">Favorites</string>
+    <string name="bottomBarOption_location">Location</string>
+    <string name="bottomBarOption_shoppingCart">Shopping Cart</string>
+    <string name="bottomBarOption_profile">Profile</string>
+
 </resources>
