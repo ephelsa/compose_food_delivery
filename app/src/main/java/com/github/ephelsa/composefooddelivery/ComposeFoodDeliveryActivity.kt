@@ -13,6 +13,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.github.ephelsa.composefooddelivery.ui.component.NavigationFoodDeliveryBottomBar
+import com.github.ephelsa.composefooddelivery.ui.component.UserFoodDeliveryToolbar
+import com.github.ephelsa.composefooddelivery.ui.home.HomeBody
 import com.github.ephelsa.ui.theme.ComposeFoodDeliveryTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,14 +30,32 @@ class ComposeFoodDeliveryActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalAnimationApi
 @Composable
 fun ComposeFoodDeliveryApp() {
     ComposeFoodDeliveryTheme {
         val navController = rememberNavController()
-//        val backstackEntry = navController.currentBackStackEntryAsState()
-//        val currentScreen = ComposeFoodDeliveryScreen.fromRoute(backstackEntry.value?.destination?.route)
+        val backstackEntry = navController.currentBackStackEntryAsState()
+        val currentScreen = ComposeFoodDeliveryScreen.fromRoute(backstackEntry.value?.destination?.route)
 
-        Scaffold {
+        Scaffold(
+            topBar = {
+                if (currentScreen.toolbar)
+                    UserFoodDeliveryToolbar(
+                        onProfileClick = {},
+                        onSettingsClick = {}
+                    )
+            },
+            bottomBar = {
+                if (currentScreen.bottomBar) {
+                    val options = ComposeFoodDeliveryScreen
+                        .values()
+                        .filter(ComposeFoodDeliveryScreen::isBottomBarOption)
+
+                    NavigationFoodDeliveryBottomBar(options)
+                }
+            }
+        ) {
             ComposeFoodDeliveryNavHost(navController, modifier = Modifier.padding(it))
         }
     }
@@ -48,7 +69,7 @@ fun ComposeFoodDeliveryNavHost(navController: NavHostController, modifier: Modif
         modifier = modifier
     ) {
         composable(ComposeFoodDeliveryScreen.Home.name) {
-
+            HomeBody()
         }
 
         composable(ComposeFoodDeliveryScreen.Details.name) {
