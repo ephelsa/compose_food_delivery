@@ -12,5 +12,6 @@ val Roboto = FontFamily(
 )
 
 val Poppins = FontFamily(
-    Font(R.font.poppins_regular)
+    Font(R.font.poppins_regular),
+    Font(R.font.poppins_bold, FontWeight.Bold)
 )
