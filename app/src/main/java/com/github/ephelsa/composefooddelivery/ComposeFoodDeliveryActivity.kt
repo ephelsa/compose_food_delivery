@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.github.ephelsa.composefooddelivery.ui.component.NavigationFoodDeliveryBottomBar
 import com.github.ephelsa.composefooddelivery.ui.component.UserFoodDeliveryToolbar
 import com.github.ephelsa.composefooddelivery.ui.control.UnderConstructionBody
+import com.github.ephelsa.composefooddelivery.ui.details.DetailsScreen
 import com.github.ephelsa.composefooddelivery.ui.home.HomeBody
 import com.github.ephelsa.ui.theme.ComposeFoodDeliveryTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -100,7 +101,7 @@ fun ComposeFoodDeliveryNavHost(navController: NavHostController, modifier: Modif
         }
 
         composable(ComposeFoodDeliveryScreen.Details.name) {
-            UnderConstructionBody()
+            DetailsScreen()
         }
     }
 }
