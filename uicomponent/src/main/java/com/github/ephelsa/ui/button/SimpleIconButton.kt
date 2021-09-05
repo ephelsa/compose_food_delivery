@@ -30,7 +30,7 @@ fun SimpleIconButton(
     paddingIcon: Dp = 12.dp,
     enabled: Boolean = true,
     backgroundColor: Color = MaterialTheme.colors.primary,
-    iconColor: Color = PinkSwan,
+    iconColor: Color = MaterialTheme.colors.onBackground,
     onClick: () -> Unit
 ) {
     val backgroundFill = if (fillBackground) {
