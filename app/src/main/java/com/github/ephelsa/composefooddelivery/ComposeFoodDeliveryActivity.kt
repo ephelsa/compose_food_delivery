@@ -76,7 +76,7 @@ fun ComposeFoodDeliveryNavHost(navController: NavHostController, modifier: Modif
         modifier = modifier
     ) {
         composable(ComposeFoodDeliveryScreen.Home.name) {
-            HomeBody()
+            HomeBody { navController.navigate(it.name) }
         }
 
         composable(ComposeFoodDeliveryScreen.Favorites.name) {

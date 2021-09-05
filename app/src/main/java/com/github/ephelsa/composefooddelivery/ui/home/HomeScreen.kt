@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import com.github.ephelsa.composefooddelivery.ComposeFoodDeliveryScreen
 import com.github.ephelsa.composefooddelivery.R
 import com.github.ephelsa.ui.button.SimpleIconButton
 import com.github.ephelsa.ui.card.CategoryCard
@@ -34,7 +35,7 @@ import com.github.ephelsa.ui.theme.HugeSpacing
 import com.github.ephelsa.ui.theme.LargeSpacing
 
 @Composable
-fun HomeBody() {
+fun HomeBody(screen: (ComposeFoodDeliveryScreen) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,7 +50,7 @@ fun HomeBody() {
         Spacer(Modifier.height(ExtraHugeSpacing))
         CategorySection()
         Spacer(Modifier.height(ExtraHugeSpacing))
-        RecommendedSection()
+        RecommendedSection(screen)
     }
 }
 
@@ -115,7 +116,7 @@ private fun CategorySection() {
 }
 
 @Composable
-private fun RecommendedSection() {
+private fun RecommendedSection(screen: (ComposeFoodDeliveryScreen) -> Unit) {
     val context = LocalContext.current
 
     Column {
@@ -137,7 +138,7 @@ private fun RecommendedSection() {
                     price = 15.50,
                     isAvailable = true,
                     onDetails = {
-                        Toast.makeText(context, "Details", Toast.LENGTH_SHORT).show()
+                        screen(ComposeFoodDeliveryScreen.Details)
                     },
                     onAdd = {
                         Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show()
