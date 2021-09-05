@@ -8,7 +8,7 @@ import com.github.ephelsa.ui.R
 val Roboto = FontFamily(
     Font(R.font.roboto_thin, FontWeight.Thin),
     Font(R.font.roboto_medium),
-    Font(R.font.roboto_bold, FontWeight.Bold)
+    Font(R.font.roboto_black, FontWeight.Bold)
 )
 
 val Poppins = FontFamily(
