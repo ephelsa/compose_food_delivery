@@ -7,4 +7,6 @@
     <string name="bottomBarOption_shoppingCart">Shopping Cart</string>
     <string name="bottomBarOption_profile">Profile</string>
 
+    <string name="sectionLabel_categories">Categories</string>
+    <string name="sectionLabel_recommended">Recommended</string>
 </resources>
