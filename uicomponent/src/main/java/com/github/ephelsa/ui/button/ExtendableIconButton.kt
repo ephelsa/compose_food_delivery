@@ -52,20 +52,15 @@ fun ExtendableIconButton(
     iconColor: Color = PinkSwan,
     onClick: () -> Unit
 ) {
-    val (extended, setExtend) = remember { mutableStateOf(isExtended) }
-
     Column(
         modifier = Modifier
             .width((ExpandableIcon.value * 1.5).dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        IconButton(imageVector, text, extended, iconColor) {
-            setExtend(!extended)
-            onClick()
-        }
+        IconButton(imageVector, text, isExtended, iconColor, onClick)
         Spacer(Modifier.height(ExtraSmallSpacing))
-        ExtendableText(extended, text)
+        ExtendableText(isExtended, text)
     }
 }
 
