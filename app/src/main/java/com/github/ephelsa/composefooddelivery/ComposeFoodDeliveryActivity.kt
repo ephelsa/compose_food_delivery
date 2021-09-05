@@ -15,6 +15,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.github.ephelsa.composefooddelivery.ui.component.NavigationFoodDeliveryBottomBar
 import com.github.ephelsa.composefooddelivery.ui.component.UserFoodDeliveryToolbar
+import com.github.ephelsa.composefooddelivery.ui.control.UnderConstructionBody
 import com.github.ephelsa.composefooddelivery.ui.home.HomeBody
 import com.github.ephelsa.ui.theme.ComposeFoodDeliveryTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,8 +43,12 @@ fun ComposeFoodDeliveryApp() {
             topBar = {
                 if (currentScreen.toolbar)
                     UserFoodDeliveryToolbar(
-                        onProfileClick = {},
-                        onSettingsClick = {}
+                        onProfileClick = {
+                            navController.navigate(ComposeFoodDeliveryScreen.Profile.name)
+                        },
+                        onSettingsClick = {
+                            navController.navigate(ComposeFoodDeliveryScreen.Settings.name)
+                        }
                     )
             },
             bottomBar = {
@@ -52,7 +57,9 @@ fun ComposeFoodDeliveryApp() {
                         .values()
                         .filter(ComposeFoodDeliveryScreen::isBottomBarOption)
 
-                    NavigationFoodDeliveryBottomBar(options)
+                    NavigationFoodDeliveryBottomBar(currentScreen, options) { screen ->
+                        navController.navigate(screen.name)
+                    }
                 }
             }
         ) {
@@ -72,8 +79,28 @@ fun ComposeFoodDeliveryNavHost(navController: NavHostController, modifier: Modif
             HomeBody()
         }
 
-        composable(ComposeFoodDeliveryScreen.Details.name) {
+        composable(ComposeFoodDeliveryScreen.Favorites.name) {
+            UnderConstructionBody()
+        }
 
+        composable(ComposeFoodDeliveryScreen.Location.name) {
+            UnderConstructionBody()
+        }
+
+        composable(ComposeFoodDeliveryScreen.ShoppingCart.name) {
+            UnderConstructionBody()
+        }
+
+        composable(ComposeFoodDeliveryScreen.Profile.name) {
+            UnderConstructionBody()
+        }
+
+        composable(ComposeFoodDeliveryScreen.Settings.name) {
+            UnderConstructionBody()
+        }
+
+        composable(ComposeFoodDeliveryScreen.Details.name) {
+            UnderConstructionBody()
         }
     }
 }

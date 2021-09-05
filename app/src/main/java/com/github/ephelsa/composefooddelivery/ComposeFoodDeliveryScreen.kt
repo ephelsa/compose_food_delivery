@@ -54,6 +54,11 @@ enum class ComposeFoodDeliveryScreen(
         icon = Icons.Rounded.Person,
         strRes = R.string.bottomBarOption_profile
     ),
+    Settings(
+        toolbar = false,
+        bottomBar = false,
+        isBottomBarOption = false,
+    ),
     Details(
         toolbar = false,
         bottomBar = false,
@@ -63,6 +68,11 @@ enum class ComposeFoodDeliveryScreen(
     companion object {
         fun fromRoute(route: String?): ComposeFoodDeliveryScreen = when (route?.substringBefore("/")) {
             Home.name, null -> Home
+            Favorites.name -> Favorites
+            Location.name -> Location
+            ShoppingCart.name -> ShoppingCart
+            Profile.name -> Profile
+            Settings.name -> Settings
             Details.name -> Details
             else -> throw IllegalArgumentException("Route $route is not recognized!")
         }

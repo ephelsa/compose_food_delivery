@@ -30,7 +30,9 @@ import com.github.ephelsa.ui.theme.LargeSpacing
 @ExperimentalAnimationApi
 @Composable
 fun NavigationFoodDeliveryBottomBar(
-    options: List<ComposeFoodDeliveryScreen>
+    currentScreen: ComposeFoodDeliveryScreen,
+    options: List<ComposeFoodDeliveryScreen>,
+    onOptionClick: (ComposeFoodDeliveryScreen) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -48,7 +50,7 @@ fun NavigationFoodDeliveryBottomBar(
         contentAlignment = Alignment.BottomCenter
     ) {
         BottomLimit()
-        Options(options)
+        Options(currentScreen, options, onOptionClick)
     }
 }
 
@@ -71,7 +73,9 @@ private fun BottomLimit() {
 @ExperimentalAnimationApi
 @Composable
 private fun Options(
-    options: List<ComposeFoodDeliveryScreen>
+    currentScreen: ComposeFoodDeliveryScreen,
+    options: List<ComposeFoodDeliveryScreen>,
+    onOptionClick: (ComposeFoodDeliveryScreen) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -81,12 +85,13 @@ private fun Options(
         verticalAlignment = Alignment.Bottom,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        options.map {
+        options.map { option ->
             ExtendableIconButton(
-                imageVector = it.icon!!,
-                text = stringResource(id = it.strRes!!)
+                isExtended = option == currentScreen,
+                imageVector = option.icon!!,
+                text = stringResource(id = option.strRes!!)
             ) {
-                // TODO: Click action
+                onOptionClick(option)
             }
         }
     }
