@@ -26,13 +26,12 @@ fun ApplicationToolbar(
 
     Surface(
         modifier = Modifier
-            .padding(
-                horizontal = ExtraLargeSpacing
-            )
             .fillMaxWidth()
             .height(80.dp),
     ) {
         Row(
+            modifier = Modifier
+                .padding(horizontal = ExtraLargeSpacing),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
