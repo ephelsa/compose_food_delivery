@@ -33,12 +33,18 @@ fun SimpleIconButton(
     iconColor: Color = PinkSwan,
     onClick: () -> Unit
 ) {
+    val backgroundFill = if (fillBackground) {
+        if (enabled) backgroundColor else PinkSwan
+    } else {
+        Color.Transparent
+    }
+
     Box(
         modifier = Modifier
             .clip(MaterialTheme.shapes.small)
             .size(size)
             .background(
-                color = if (fillBackground) backgroundColor else Color.Transparent,
+                color = backgroundFill,
             )
             .clickable(
                 enabled = enabled,
