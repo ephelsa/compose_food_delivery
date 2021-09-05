@@ -37,7 +37,7 @@ fun NavigationFoodDeliveryBottomBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(90.dp + ExtraLargeSpacing)
+            .height(100.dp)
             .padding(bottom = LargeSpacing)
             .background(
                 brush = Brush.verticalGradient(
