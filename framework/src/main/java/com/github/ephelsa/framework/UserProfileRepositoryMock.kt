@@ -4,13 +4,17 @@ import com.github.ephelsa.data.UserProfileRepository
 import com.github.ephelsa.domain.LocationInformation
 import com.github.ephelsa.domain.PhoneInformation
 import com.github.ephelsa.domain.UserInformation
+import com.github.ephelsa.framework.di.IODispatcher
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-class UserProfileRepositoryMock(
-    override val coroutineContext: CoroutineContext
+@Singleton
+class UserProfileRepositoryMock @Inject constructor(
+    @IODispatcher override val coroutineContext: CoroutineContext
 ) : UserProfileRepository, CoroutineScope {
 
     override suspend fun getUserInformation(): UserInformation = withContext(coroutineContext) {
