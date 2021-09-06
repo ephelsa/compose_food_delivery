@@ -9,3 +9,6 @@ dependencyResolutionManagement {
 rootProject.name = "Compose Food Delivery"
 include ':app'
 include ':uicomponent'
+include ':domain'
+include ':data'
+include ':framework'

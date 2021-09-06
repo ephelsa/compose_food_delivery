@@ -14,7 +14,7 @@ def libVersion = [
         ],
 
         hilt      : [
-                root: '2.28-alpha'
+                root: '2.38.1'
         ],
 
         thirdParty: [
