@@ -43,6 +43,8 @@ android {
 }
 
 dependencies {
+    implementation project(':domain')
+
     api dependency.compose.ui
     api dependency.compose.material
     api dependency.compose.preview
