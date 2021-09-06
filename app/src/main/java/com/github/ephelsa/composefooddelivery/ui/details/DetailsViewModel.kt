@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.ephelsa.data.ProductRepository
 import com.github.ephelsa.domain.Product
+import com.github.ephelsa.domain.ProductWithID
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,10 +24,10 @@ class DetailsViewModel @Inject constructor(
     val onDetails: StateFlow<Product?>
         get() = details
 
-    fun getDetails(realId: String = "Sushi_1") {
+    fun getDetails(productWithID: ProductWithID) {
         viewModelScope.launch {
             loadingDetails.emit(true)
-            details.emit(productRepository.getProductDetails(realId))
+            details.emit(productRepository.getProductDetails(productWithID.getRealID()))
             loadingDetails.emit(false)
         }
     }

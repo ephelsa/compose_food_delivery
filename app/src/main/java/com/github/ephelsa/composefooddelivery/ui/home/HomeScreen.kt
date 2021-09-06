@@ -34,6 +34,7 @@ import com.github.ephelsa.composefooddelivery.R
 import com.github.ephelsa.composefooddelivery.route.ComposeFoodDeliveryScreen
 import com.github.ephelsa.composefooddelivery.ui.extras.Loader
 import com.github.ephelsa.domain.Category
+import com.github.ephelsa.domain.ProductWithID
 import com.github.ephelsa.ui.button.SimpleIconButton
 import com.github.ephelsa.ui.card.CategoryCard
 import com.github.ephelsa.ui.card.RecommendedCard
@@ -46,7 +47,8 @@ import com.github.ephelsa.ui.theme.LargeSpacing
 @Composable
 fun HomeBody(
     viewModel: HomeViewModel,
-    screen: (ComposeFoodDeliveryScreen) -> Unit
+    onRecommended: (ProductWithID) -> Unit,
+    navigate: (ComposeFoodDeliveryScreen) -> Unit
 ) {
     val (categoryType, setCategoryType) = rememberSaveable { mutableStateOf<Category.CategoryType?>(null) }
 
@@ -69,7 +71,7 @@ fun HomeBody(
             }
         }
         Spacer(Modifier.height(ExtraHugeSpacing))
-        RecommendedSection(viewModel, screen)
+        RecommendedSection(viewModel, onRecommended, navigate)
     }
 }
 
@@ -154,6 +156,7 @@ private fun CategorySection(
 @Composable
 private fun RecommendedSection(
     viewModel: HomeViewModel,
+    onRecommended: (ProductWithID) -> Unit,
     screen: (ComposeFoodDeliveryScreen) -> Unit
 ) {
     val context = LocalContext.current
@@ -191,6 +194,7 @@ private fun RecommendedSection(
                             price = it.price,
                             isAvailable = it.isAvailable,
                             onDetails = {
+                                onRecommended(it)
                                 screen(ComposeFoodDeliveryScreen.Details)
                             },
                             onAdd = {

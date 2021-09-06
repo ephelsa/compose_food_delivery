@@ -55,6 +55,6 @@ object IngredientsMock {
 
     val Rice = Ingredient(
         name = "Rice",
-        image = "https://img.favpng.com/14/17/4/cooked-rice-glutinous-rice-bowl-png-favpng-7L2Je2YM6XXNsNBfyjNi2ts5s.jpg"
+        image = "https://www.cashadvance6online.com/data/archive/img/3098290321.png"
     )
 }
