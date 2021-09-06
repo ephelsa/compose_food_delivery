@@ -63,8 +63,10 @@ fun HomeBody(
         Search()
         Spacer(Modifier.height(ExtraHugeSpacing))
         CategorySection(viewModel, categoryType) {
-            viewModel.getRecommended(it)
-            setCategoryType(it)
+            if (it != categoryType) {
+                viewModel.getRecommended(it)
+                setCategoryType(it)
+            }
         }
         Spacer(Modifier.height(ExtraHugeSpacing))
         RecommendedSection(viewModel, screen)
@@ -170,23 +172,32 @@ private fun RecommendedSection(
             isLoading = shouldLoad,
             modifier = Modifier.fillMaxWidth()
         ) {
-            LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(LargeSpacing, Alignment.Start)
-            ) {
-                items(recommended) {
-                    RecommendedCard(
-                        painter = rememberImagePainter(data = it.image),
-                        name = it.name,
-                        label = stringResource(R.string.sectionLabel_startingFrom),
-                        price = it.price,
-                        isAvailable = it.isAvailable,
-                        onDetails = {
-                            screen(ComposeFoodDeliveryScreen.Details)
-                        },
-                        onAdd = {
-                            Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show()
-                        }
-                    )
+            if (recommended.isEmpty()) {
+                Text(
+                    text = stringResource(R.string.empty_section),
+                    style = MaterialTheme.typography.h6,
+                    color = MaterialTheme.colors.error
+                )
+            } else {
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(LargeSpacing, Alignment.Start)
+                ) {
+
+                    items(recommended) {
+                        RecommendedCard(
+                            painter = rememberImagePainter(data = it.image),
+                            name = it.name,
+                            label = stringResource(R.string.sectionLabel_startingFrom),
+                            price = it.price,
+                            isAvailable = it.isAvailable,
+                            onDetails = {
+                                screen(ComposeFoodDeliveryScreen.Details)
+                            },
+                            onAdd = {
+                                Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show()
+                            }
+                        )
+                    }
                 }
             }
         }

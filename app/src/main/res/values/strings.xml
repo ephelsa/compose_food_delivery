@@ -14,4 +14,6 @@
     <string name="details_deliveryIn">Delivery in %d min</string>
 
     <string name="buttonLabel_addToCart">Add to Cart</string>
+
+    <string name="empty_section">This section is empty (｡•́︿•̀｡)</string>
 </resources>
