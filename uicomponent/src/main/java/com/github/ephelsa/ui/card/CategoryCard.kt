@@ -27,7 +27,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -43,6 +45,14 @@ private val IconBoxSize = 28.dp
 fun CategoryCard(
     text: String,
     imageVector: ImageVector,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) = CategoryCard(text, rememberVectorPainter(imageVector), isSelected, onClick)
+
+@Composable
+fun CategoryCard(
+    text: String,
+    painter: Painter,
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
@@ -77,14 +87,14 @@ fun CategoryCard(
             }
             .clickable(onClick = onClick)
     ) {
-        CategoryCardContent(text, imageVector, isSelected)
+        CategoryCardContent(text, painter, isSelected)
     }
 }
 
 @Composable
 private fun CategoryCardContent(
     text: String,
-    imageVector: ImageVector,
+    painter: Painter,
     isSelected: Boolean,
 ) {
     Column(
@@ -96,7 +106,7 @@ private fun CategoryCardContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            imageVector = imageVector,
+            painter = painter,
             contentDescription = text,
             modifier = Modifier
                 .fillMaxWidth()

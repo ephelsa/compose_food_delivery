@@ -2,19 +2,18 @@ package com.github.ephelsa.framework
 
 import com.github.ephelsa.data.CategoryRepository
 import com.github.ephelsa.domain.Category
-import com.github.ephelsa.framework.di.IODispatcher
-import dagger.hilt.android.scopes.ViewModelScoped
-import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-@ViewModelScoped
-class CategoryRepositoryMock @Inject constructor(
-    @IODispatcher override val coroutineContext: CoroutineContext
+class CategoryRepositoryMock(
+    override val coroutineContext: CoroutineContext
 ) : CategoryRepository, CoroutineScope {
 
     override suspend fun getCategories(): List<Category> = withContext(coroutineContext) {
+        delay(2_000)
+
         listOf(
             Category(
                 categoryType = Category.CategoryType.Burger,

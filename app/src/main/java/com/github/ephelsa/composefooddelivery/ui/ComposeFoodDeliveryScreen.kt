@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,6 +18,7 @@ import com.github.ephelsa.composefooddelivery.ui.extras.NavigationFoodDeliveryBo
 import com.github.ephelsa.composefooddelivery.ui.extras.UnderConstructionBody
 import com.github.ephelsa.composefooddelivery.ui.extras.UserFoodDeliveryToolbar
 import com.github.ephelsa.composefooddelivery.ui.home.HomeBody
+import com.github.ephelsa.composefooddelivery.ui.home.HomeViewModel
 import com.github.ephelsa.ui.theme.ComposeFoodDeliveryTheme
 
 @ExperimentalCoilApi
@@ -57,15 +59,19 @@ fun ComposeFoodDeliveryApp() {
     }
 }
 
+@ExperimentalAnimationApi
+@ExperimentalCoilApi
 @Composable
 fun ComposeFoodDeliveryNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
+    val homeViewModel = viewModel<HomeViewModel>()
+
     NavHost(
         navController = navController,
         startDestination = ComposeFoodDeliveryScreen.Home.name,
         modifier = modifier
     ) {
         composable(ComposeFoodDeliveryScreen.Home.name) {
-            HomeBody { navController.navigate(it.name) }
+            HomeBody(homeViewModel) { navController.navigate(it.name) }
         }
 
         composable(ComposeFoodDeliveryScreen.Favorites.name) {
