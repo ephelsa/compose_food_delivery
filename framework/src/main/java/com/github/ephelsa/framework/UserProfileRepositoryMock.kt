@@ -4,17 +4,13 @@ import com.github.ephelsa.data.UserProfileRepository
 import com.github.ephelsa.domain.LocationInformation
 import com.github.ephelsa.domain.PhoneInformation
 import com.github.ephelsa.domain.UserInformation
-import com.github.ephelsa.framework.di.IODispatcher
-import javax.inject.Inject
-import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-@Singleton
-class UserProfileRepositoryMock @Inject constructor(
-    @IODispatcher override val coroutineContext: CoroutineContext
+class UserProfileRepositoryMock(
+    override val coroutineContext: CoroutineContext
 ) : UserProfileRepository, CoroutineScope {
 
     override suspend fun getUserInformation(): UserInformation = withContext(coroutineContext) {
@@ -42,7 +38,7 @@ class UserProfileRepositoryMock @Inject constructor(
     }
 
     override suspend fun getUserThumbnail(): String = withContext(coroutineContext) {
-        delay(500L)
+        delay(3_000L)
 
         "https://avatars.githubusercontent.com/u/25624035?v=4"
     }
