@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -22,8 +23,11 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.github.ephelsa.ui.theme.MediumSpacing
 import com.github.ephelsa.ui.theme.MediumSpacing1
-import com.github.ephelsa.ui.theme.SmallSpacing
+
+private val CategoryCardHeight = 90.dp
+private val CategoryCardWidth = 70.dp
 
 @Composable
 fun IngredientCard(
@@ -40,14 +44,12 @@ fun IngredientCard(
 ) {
     Box(
         modifier = Modifier
-            .size(60.dp, 70.dp)
-            .background(
-                color = backgroundColor,
-                shape = MaterialTheme.shapes.medium
-            )
+            .size(CategoryCardWidth, CategoryCardHeight)
+            .clip(MaterialTheme.shapes.medium)
+            .background(backgroundColor)
             .padding(
                 horizontal = MediumSpacing1,
-                vertical = SmallSpacing
+                vertical = MediumSpacing
             )
     ) {
         Column(

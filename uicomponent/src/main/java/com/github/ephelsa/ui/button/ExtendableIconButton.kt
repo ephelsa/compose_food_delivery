@@ -26,12 +26,9 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Home
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -89,10 +86,6 @@ private fun IconButton(
                         scaleY = CoverScale
                     )
                     .clip(CircleShape)
-                    .shadow(
-                        elevation = 4.dp,
-                        shape = CircleShape
-                    )
                     .background(
                         color = MaterialTheme.colors.surface
                     )
