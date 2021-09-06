@@ -40,14 +40,16 @@ import com.github.ephelsa.ui.theme.LargeSpacing
 import com.github.ephelsa.ui.toolbar.ApplicationToolbar
 
 @Composable
-fun DetailsScreen() {
+fun DetailsScreen(
+    onBackClick: () -> Unit
+) {
     val (isFavorite, setFavorite) = remember { mutableStateOf(false) }
 
     Scaffold(
         topBar = {
             DetailsToolbar(
                 isFavorite = isFavorite,
-                onBackClick = {},
+                onBackClick = onBackClick,
                 onFavoriteClick = {
                     setFavorite(!isFavorite)
                 }
@@ -71,7 +73,7 @@ private fun DetailsToolbar(
         leftItem = {
             SimpleIconButton(
                 imageVector = Icons.Rounded.KeyboardArrowLeft,
-                contentDescription = "Settings",
+                contentDescription = stringResource(R.string.contentDescription_backPage),
                 fillBackground = false,
                 onClick = onBackClick
             )
@@ -79,7 +81,9 @@ private fun DetailsToolbar(
         rightItem = {
             SimpleIconButton(
                 imageVector = if (isFavorite) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder,
-                contentDescription = "Settings",
+                contentDescription = stringResource(
+                    id = if (isFavorite) R.string.contentDescription_unsetFavorite else R.string.contentDescription_setFavorite
+                ),
                 fillBackground = false,
                 onClick = onFavoriteClick,
                 iconColor = if (isFavorite) MaterialTheme.colors.primary else MaterialTheme.colors.onBackground

@@ -16,4 +16,12 @@
     <string name="buttonLabel_addToCart">Add to Cart</string>
 
     <string name="empty_section">This section is empty (｡•́︿•̀｡)</string>
+
+    <string name="contentDescription_profile">Profile</string>
+    <string name="contentDescription_filter">Filter</string>
+    <string name="contentDescription_settings">Settings</string>
+    <string name="contentDescription_backPage">Back</string>
+    <string name="contentDescription_setFavorite">Set favorite</string>
+    <string name="contentDescription_unsetFavorite">Unset favorite</string>
+
 </resources>

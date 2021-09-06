@@ -100,7 +100,7 @@ private fun Search() {
         // TODO: Search field
         SimpleIconButton(
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_tune),
-            contentDescription = "Filter",
+            contentDescription = stringResource(R.string.contentDescription_filter),
             fillBackground = true
         ) {
 

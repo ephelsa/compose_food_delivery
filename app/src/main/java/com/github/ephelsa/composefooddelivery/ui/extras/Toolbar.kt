@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,7 +36,7 @@ fun UserFoodDeliveryToolbar(
             Loader(shouldLoad) {
                 ThumbImageIcon(
                     painter = painter,
-                    contentDescription = "Profile",
+                    contentDescription = stringResource(R.string.contentDescription_profile),
                     onClick = onProfileClick
                 )
             }
@@ -43,7 +44,7 @@ fun UserFoodDeliveryToolbar(
         rightItem = {
             SimpleIconButton(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_grid_layout),
-                contentDescription = "Settings",
+                contentDescription = stringResource(R.string.contentDescription_settings),
                 fillBackground = false,
                 paddingIcon = 16.dp,
                 onClick = onSettingsClick
