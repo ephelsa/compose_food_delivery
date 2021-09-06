@@ -27,8 +27,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.github.ephelsa.composefooddelivery.R
 import com.github.ephelsa.ui.button.SimpleIconButton
 import com.github.ephelsa.ui.card.CatalogImageCard
 import com.github.ephelsa.ui.card.IngredientCard
@@ -117,7 +119,7 @@ private fun InfoSection() {
             )
 
             Text(
-                text = "Delivery in 20Min",
+                text = stringResource(R.string.details_deliveryIn, 20),
                 style = MaterialTheme.typography.body2,
             )
 
@@ -176,6 +178,6 @@ private fun Footer() {
             .height(55.dp),
         shape = CircleShape
     ) {
-        Text(text = "Add to Cart")
+        Text(text = stringResource(R.string.buttonLabel_addToCart))
     }
 }
