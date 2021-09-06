@@ -19,6 +19,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -46,6 +48,8 @@ fun HomeBody(
     viewModel: HomeViewModel,
     screen: (ComposeFoodDeliveryScreen) -> Unit
 ) {
+    val (categoryType, setCategoryType) = rememberSaveable { mutableStateOf<Category.CategoryType?>(null) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -58,7 +62,10 @@ fun HomeBody(
         Spacer(Modifier.height(ExtraHugeSpacing))
         Search()
         Spacer(Modifier.height(ExtraHugeSpacing))
-        CategorySection(viewModel, Category.CategoryType.Burger) {}
+        CategorySection(viewModel, categoryType) {
+            viewModel.getRecommended(it)
+            setCategoryType(it)
+        }
         Spacer(Modifier.height(ExtraHugeSpacing))
         RecommendedSection(viewModel, screen)
     }
@@ -104,7 +111,7 @@ private fun Search() {
 @Composable
 private fun CategorySection(
     viewModel: HomeViewModel,
-    categorySelected: Category.CategoryType,
+    categorySelected: Category.CategoryType?,
     onClick: (Category.CategoryType) -> Unit
 ) {
     val shouldLoad by viewModel.onLoadingCategories.collectAsState()
@@ -164,7 +171,7 @@ private fun RecommendedSection(
             modifier = Modifier.fillMaxWidth()
         ) {
             LazyRow(
-                horizontalArrangement = Arrangement.spacedBy(LargeSpacing)
+                horizontalArrangement = Arrangement.spacedBy(LargeSpacing, Alignment.Start)
             ) {
                 items(recommended) {
                     RecommendedCard(
