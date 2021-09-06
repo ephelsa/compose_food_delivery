@@ -25,7 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import com.github.ephelsa.composefooddelivery.ComposeFoodDeliveryScreen
+import com.github.ephelsa.composefooddelivery.route.ComposeFoodDeliveryScreen
 import com.github.ephelsa.composefooddelivery.R
 import com.github.ephelsa.ui.button.SimpleIconButton
 import com.github.ephelsa.ui.card.CategoryCard

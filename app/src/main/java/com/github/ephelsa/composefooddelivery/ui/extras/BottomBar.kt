@@ -1,4 +1,4 @@
-package com.github.ephelsa.composefooddelivery.ui.component
+package com.github.ephelsa.composefooddelivery.ui.extras
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.github.ephelsa.composefooddelivery.ComposeFoodDeliveryScreen
+import com.github.ephelsa.composefooddelivery.route.ComposeFoodDeliveryScreen
 import com.github.ephelsa.ui.button.ExtendableIconButton
 import com.github.ephelsa.ui.theme.GreenWhite
 import com.github.ephelsa.ui.theme.LargeSpacing

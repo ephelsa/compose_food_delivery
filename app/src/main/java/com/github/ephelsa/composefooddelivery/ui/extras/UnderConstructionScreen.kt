@@ -1,4 +1,4 @@
-package com.github.ephelsa.composefooddelivery.ui.control
+package com.github.ephelsa.composefooddelivery.ui.extras
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

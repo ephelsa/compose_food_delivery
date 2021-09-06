@@ -1,4 +1,4 @@
-package com.github.ephelsa.composefooddelivery.ui.component
+package com.github.ephelsa.composefooddelivery.ui.extras
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person

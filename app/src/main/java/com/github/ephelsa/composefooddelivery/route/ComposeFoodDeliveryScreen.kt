@@ -1,4 +1,4 @@
-package com.github.ephelsa.composefooddelivery
+package com.github.ephelsa.composefooddelivery.route
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
@@ -8,6 +8,7 @@ import androidx.compose.material.icons.rounded.LocationOn
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.ShoppingCart
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.github.ephelsa.composefooddelivery.R
 
 /**
  * This class contains all the screen's routes for the application!
