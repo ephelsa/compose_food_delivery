@@ -1,8 +1,10 @@
 package com.github.ephelsa.framework.di
 
 import com.github.ephelsa.data.CategoryRepository
+import com.github.ephelsa.data.ProductRepository
 import com.github.ephelsa.data.UserProfileRepository
 import com.github.ephelsa.framework.CategoryRepositoryMock
+import com.github.ephelsa.framework.ProductRepositoryMock
 import com.github.ephelsa.framework.UserProfileRepositoryMock
 import dagger.Module
 import dagger.Provides
@@ -29,5 +31,13 @@ object RepositoryModule {
         @IODispatcher dispatcher: CoroutineDispatcher
     ): CategoryRepository {
         return CategoryRepositoryMock(dispatcher)
+    }
+
+    @ViewModelScoped
+    @Provides
+    internal fun providesProductRepository(
+        @IODispatcher dispatcher: CoroutineDispatcher
+    ): ProductRepository {
+        return ProductRepositoryMock(dispatcher)
     }
 }

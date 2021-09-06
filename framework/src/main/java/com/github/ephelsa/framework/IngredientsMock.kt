@@ -39,12 +39,22 @@ object IngredientsMock {
     )
 
     val Onions = Ingredient(
-        name= "Onions",
+        name = "Onions",
         image = "https://greenoyard.com/wp-content/uploads/2021/05/Onion-1.png"
     )
 
     val Basil = Ingredient(
         name = "Basil",
         image = "https://www.setasdelacosta.com.co/wp-content/uploads/2020/09/26.png"
+    )
+
+    val Fish = Ingredient(
+        name = "Fish",
+        image = "https://cdn.shopify.com/s/files/1/0269/7723/9113/products/SalmonsteakcutTransparent_86ddea83-ba4a-49e8-b633-b0517b33bb50_1200x1200.png?v=1602323982"
+    )
+
+    val Rice = Ingredient(
+        name = "Rice",
+        image = "https://img.favpng.com/14/17/4/cooked-rice-glutinous-rice-bowl-png-favpng-7L2Je2YM6XXNsNBfyjNi2ts5s.jpg"
     )
 }

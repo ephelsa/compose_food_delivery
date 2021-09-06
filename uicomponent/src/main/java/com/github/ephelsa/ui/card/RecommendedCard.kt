@@ -22,9 +22,10 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,6 +47,17 @@ fun RecommendedCard(
     isAvailable: Boolean = true,
     onDetails: () -> Unit,
     onAdd: () -> Unit
+) = RecommendedCard(rememberVectorPainter(imageVector), name, label, price, isAvailable, onDetails, onAdd)
+
+@Composable
+fun RecommendedCard(
+    painter: Painter,
+    name: String,
+    label: String,
+    price: Double,
+    isAvailable: Boolean = true,
+    onDetails: () -> Unit,
+    onAdd: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -55,7 +67,7 @@ fun RecommendedCard(
     ) {
         InformationCard(name, label, price, isAvailable, onAdd)
         Image(
-            imageVector = imageVector,
+            painter = painter,
             contentDescription = "$name $price",
             modifier = Modifier
                 .height((CardHeight.value * 0.6).dp)
@@ -88,7 +100,7 @@ private fun InformationCard(
         Text(
             text = name,
             style = MaterialTheme.typography.body2,
-            fontWeight = FontWeight.Bold
+            maxLines = 1
         )
 
         Spacer(Modifier.height(SmallSpacing))

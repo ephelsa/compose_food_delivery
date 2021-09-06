@@ -8,20 +8,25 @@ import com.github.ephelsa.framework.BurgersMock.FatBurgerOriginal
 import com.github.ephelsa.framework.BurgersMock.RedRobinsAvocado
 import com.github.ephelsa.framework.BurgersMock.TheOriginalGrassFedBurger
 import com.github.ephelsa.framework.PizzasMock.Napolitana
-import com.github.ephelsa.framework.di.IODispatcher
-import dagger.hilt.android.scopes.ViewModelScoped
-import javax.inject.Inject
+import com.github.ephelsa.framework.SushiesMock.Octopussy
+import com.github.ephelsa.framework.SushiesMock.Oma
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
-@ViewModelScoped
-class ProductRepositoryMock @Inject constructor(
-    @IODispatcher override val coroutineContext: CoroutineContext
+class ProductRepositoryMock(
+    override val coroutineContext: CoroutineContext
 ) : ProductRepository, CoroutineScope {
 
-    private val products = listOf(RedRobinsAvocado, TheOriginalGrassFedBurger, FatBurgerOriginal, Napolitana)
+    private val products = listOf(
+        RedRobinsAvocado,
+        TheOriginalGrassFedBurger,
+        FatBurgerOriginal,
+        Napolitana,
+        Octopussy,
+        Oma
+    )
 
     override suspend fun getRecommended(categoryType: Category.CategoryType?): List<Recommended> = withContext(coroutineContext) {
         if (categoryType == null)
@@ -41,7 +46,11 @@ class ProductRepositoryMock @Inject constructor(
     private suspend fun withoutCategoryType(): List<Recommended> {
         delay(3_000)
 
-        return listOf(RedRobinsAvocado, Napolitana).map(Product::toRecommended)
+        return listOf(
+            RedRobinsAvocado,
+            Napolitana,
+            Octopussy
+        ).map(Product::toRecommended)
     }
 
     override suspend fun getProductDetails(productId: String): Product? {

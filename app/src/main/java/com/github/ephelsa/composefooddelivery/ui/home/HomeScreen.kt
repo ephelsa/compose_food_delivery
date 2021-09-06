@@ -16,8 +16,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -45,7 +43,7 @@ import com.github.ephelsa.ui.theme.LargeSpacing
 @ExperimentalCoilApi
 @Composable
 fun HomeBody(
-    homeViewModel: HomeViewModel,
+    viewModel: HomeViewModel,
     screen: (ComposeFoodDeliveryScreen) -> Unit
 ) {
     Column(
@@ -60,9 +58,9 @@ fun HomeBody(
         Spacer(Modifier.height(ExtraHugeSpacing))
         Search()
         Spacer(Modifier.height(ExtraHugeSpacing))
-        CategorySection(homeViewModel, Category.CategoryType.Burger) {}
+        CategorySection(viewModel, Category.CategoryType.Burger) {}
         Spacer(Modifier.height(ExtraHugeSpacing))
-        RecommendedSection(screen)
+        RecommendedSection(viewModel, screen)
     }
 }
 
@@ -105,12 +103,12 @@ private fun Search() {
 @ExperimentalCoilApi
 @Composable
 private fun CategorySection(
-    homeViewModel: HomeViewModel,
+    viewModel: HomeViewModel,
     categorySelected: Category.CategoryType,
     onClick: (Category.CategoryType) -> Unit
 ) {
-    val shouldLoad by homeViewModel.onLoadingCategories.collectAsState()
-    val categories by homeViewModel.onCategories.collectAsState()
+    val shouldLoad by viewModel.onLoadingCategories.collectAsState()
+    val categories by viewModel.onCategories.collectAsState()
 
     Column {
         Text(
@@ -142,11 +140,16 @@ private fun CategorySection(
     }
 }
 
+@ExperimentalCoilApi
+@ExperimentalAnimationApi
 @Composable
 private fun RecommendedSection(
+    viewModel: HomeViewModel,
     screen: (ComposeFoodDeliveryScreen) -> Unit
 ) {
     val context = LocalContext.current
+    val shouldLoad by viewModel.onLoadingRecommended.collectAsState()
+    val recommended by viewModel.onRecommended.collectAsState()
 
     Column {
         Text(
@@ -156,23 +159,28 @@ private fun RecommendedSection(
 
         Spacer(Modifier.height(ExtraHugeSpacing))
 
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(LargeSpacing)
+        Loader(
+            isLoading = shouldLoad,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            items(10) {
-                RecommendedCard(
-                    imageVector = Icons.Filled.Share,
-                    name = "Sandwich",
-                    label = "Starting From",
-                    price = 15.50,
-                    isAvailable = true,
-                    onDetails = {
-                        screen(ComposeFoodDeliveryScreen.Details)
-                    },
-                    onAdd = {
-                        Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show()
-                    }
-                )
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(LargeSpacing)
+            ) {
+                items(recommended) {
+                    RecommendedCard(
+                        painter = rememberImagePainter(data = it.image),
+                        name = it.name,
+                        label = stringResource(R.string.sectionLabel_startingFrom),
+                        price = it.price,
+                        isAvailable = it.isAvailable,
+                        onDetails = {
+                            screen(ComposeFoodDeliveryScreen.Details)
+                        },
+                        onAdd = {
+                            Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
             }
         }
     }
