@@ -21,19 +21,20 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.github.ephelsa.composefooddelivery.route.ComposeFoodDeliveryScreen
+import com.github.ephelsa.composefooddelivery.navigation.ComposeFoodDeliveryRouter
 import com.github.ephelsa.ui.button.ExtendableIconButton
 import com.github.ephelsa.ui.theme.LargeSpacing
 
-internal val ToolbarHeight = 100.dp
+private val ToolbarHeight = 100.dp
+internal val VisibleToolbar = (ToolbarHeight.value / 2).dp
 
 @ExperimentalAnimationApi
 @Composable
 fun NavigationFoodDeliveryBottomBar(
-    currentScreen: ComposeFoodDeliveryScreen,
-    options: List<ComposeFoodDeliveryScreen>,
+    currentScreen: ComposeFoodDeliveryRouter,
+    options: List<ComposeFoodDeliveryRouter>,
     modifier: Modifier = Modifier,
-    onOptionClick: (ComposeFoodDeliveryScreen) -> Unit
+    onOptionClick: (ComposeFoodDeliveryRouter) -> Unit
 ) {
     Box(
         modifier = modifier
@@ -60,7 +61,7 @@ private fun BottomLimit() {
     Spacer(
         modifier = Modifier
             .fillMaxWidth()
-            .height((ToolbarHeight.value / 2).dp)
+            .height(VisibleToolbar)
             .clip(
                 MaterialTheme
                     .shapes
@@ -74,9 +75,9 @@ private fun BottomLimit() {
 @ExperimentalAnimationApi
 @Composable
 private fun Options(
-    currentScreen: ComposeFoodDeliveryScreen,
-    options: List<ComposeFoodDeliveryScreen>,
-    onOptionClick: (ComposeFoodDeliveryScreen) -> Unit
+    currentScreen: ComposeFoodDeliveryRouter,
+    options: List<ComposeFoodDeliveryRouter>,
+    onOptionClick: (ComposeFoodDeliveryRouter) -> Unit
 ) {
     Row(
         modifier = Modifier

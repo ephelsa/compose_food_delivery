@@ -43,6 +43,7 @@ import com.github.ephelsa.ui.card.IngredientCard
 import com.github.ephelsa.ui.theme.ExtraHugeSpacing
 import com.github.ephelsa.ui.theme.HugeSpacing
 import com.github.ephelsa.ui.theme.LargeSpacing
+import com.github.ephelsa.ui.theme.MediumSpacing1
 import com.github.ephelsa.ui.toolbar.ApplicationToolbar
 
 @ExperimentalAnimationApi
@@ -67,8 +68,15 @@ fun DetailsScreen(
         bottomBar = {
             Footer()
         }
-    ) {
-        DetailsBody(viewModel)
+    ) { paddings ->
+        DetailsBody(
+            viewModel = viewModel,
+            modifier = Modifier
+                .padding(
+                    top = paddings.calculateTopPadding(),
+                    bottom = PageBottomPadding
+                )
+        )
     }
 }
 
@@ -106,13 +114,14 @@ private fun DetailsToolbar(
 @Composable
 private fun DetailsBody(
     viewModel: DetailsViewModel,
+    modifier: Modifier,
 ) {
     val shouldLoad by viewModel.onLoadingDetails.collectAsState()
     val details by viewModel.onDetails.collectAsState()
 
     Loader(
         isLoading = shouldLoad,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         if (details == null) {
             Text(
@@ -122,7 +131,7 @@ private fun DetailsBody(
             )
         } else {
             Column(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxSize()
                     .padding(horizontal = HugeSpacing)
                     .verticalScroll(rememberScrollState())
@@ -150,7 +159,11 @@ private fun InfoSection(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(2f)
+        ) {
             Text(
                 text = details.name,
                 style = MaterialTheme.typography.h5
@@ -171,7 +184,9 @@ private fun InfoSection(
             text = "$${details.price}",
             style = MaterialTheme.typography.h3,
             color = MaterialTheme.colors.primary,
-            fontWeight = FontWeight.Normal
+            fontWeight = FontWeight.Normal,
+            modifier = Modifier
+                .weight(1f, false)
         )
     }
 }
@@ -216,9 +231,12 @@ private fun Footer() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(HugeSpacing)
-            .height(55.dp),
+            .height(BottomHeight),
         shape = CircleShape
     ) {
         Text(text = stringResource(R.string.buttonLabel_addToCart))
     }
 }
+
+private val BottomHeight = 55.dp
+private val PageBottomPadding = BottomHeight - HugeSpacing + MediumSpacing1

@@ -1,4 +1,4 @@
-package com.github.ephelsa.composefooddelivery.route
+package com.github.ephelsa.composefooddelivery.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
@@ -13,7 +13,7 @@ import com.github.ephelsa.composefooddelivery.R
 /**
  * This class contains all the screen's routes for the application!
  */
-enum class ComposeFoodDeliveryScreen(
+enum class ComposeFoodDeliveryRouter(
     val toolbar: Boolean,
     val bottomBar: Boolean,
     val isBottomBarOption: Boolean,
@@ -67,7 +67,7 @@ enum class ComposeFoodDeliveryScreen(
     );
 
     companion object {
-        fun fromRoute(route: String?): ComposeFoodDeliveryScreen = when (route?.substringBefore("/")) {
+        fun fromRoute(route: String?): ComposeFoodDeliveryRouter = when (route?.substringBefore("/")) {
             Home.name, null -> Home
             Favorites.name -> Favorites
             Location.name -> Location

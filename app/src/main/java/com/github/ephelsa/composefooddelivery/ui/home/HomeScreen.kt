@@ -31,7 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.github.ephelsa.composefooddelivery.R
-import com.github.ephelsa.composefooddelivery.route.ComposeFoodDeliveryScreen
+import com.github.ephelsa.composefooddelivery.navigation.ComposeFoodDeliveryRouter
 import com.github.ephelsa.composefooddelivery.ui.extras.Loader
 import com.github.ephelsa.domain.Category
 import com.github.ephelsa.domain.ProductWithID
@@ -48,7 +48,7 @@ import com.github.ephelsa.ui.theme.LargeSpacing
 fun HomeBody(
     viewModel: HomeViewModel,
     onRecommended: (ProductWithID) -> Unit,
-    navigate: (ComposeFoodDeliveryScreen) -> Unit
+    navigate: (ComposeFoodDeliveryRouter) -> Unit
 ) {
     val (categoryType, setCategoryType) = rememberSaveable { mutableStateOf<Category.CategoryType?>(null) }
 
@@ -157,7 +157,7 @@ private fun CategorySection(
 private fun RecommendedSection(
     viewModel: HomeViewModel,
     onRecommended: (ProductWithID) -> Unit,
-    screen: (ComposeFoodDeliveryScreen) -> Unit
+    screen: (ComposeFoodDeliveryRouter) -> Unit
 ) {
     val context = LocalContext.current
     val shouldLoad by viewModel.onLoadingRecommended.collectAsState()
@@ -195,7 +195,7 @@ private fun RecommendedSection(
                             isAvailable = it.isAvailable,
                             onDetails = {
                                 onRecommended(it)
-                                screen(ComposeFoodDeliveryScreen.Details)
+                                screen(ComposeFoodDeliveryRouter.Details)
                             },
                             onAdd = {
                                 Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show()

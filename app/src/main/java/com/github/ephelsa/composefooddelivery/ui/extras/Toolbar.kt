@@ -26,16 +26,18 @@ fun UserFoodDeliveryToolbar(
     onSettingsClick: () -> Unit
 ) {
     val thumbURL by viewModel.onUserThumbnail.collectAsState()
-    val painter = rememberImagePainter(
-        data = thumbURL
-    )
     val shouldLoad by viewModel.onLoadUserThumbnail.collectAsState()
 
     ApplicationToolbar(
         leftItem = {
             Loader(shouldLoad) {
                 ThumbImageIcon(
-                    painter = painter,
+                    painter = rememberImagePainter(
+                        data = thumbURL,
+                        builder = {
+                            crossfade(true)
+                        }
+                    ),
                     contentDescription = stringResource(R.string.contentDescription_profile),
                     onClick = onProfileClick
                 )
