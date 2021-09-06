@@ -58,10 +58,13 @@ dependencies {
     implementation dependency.androidX.appcompat
     implementation dependency.thirdParty.googleMaterial
     implementation dependency.androidX.lifecycleRuntime
+
     implementation dependency.hilt.viewModel
     kapt dependency.hilt.viewModelKapt
     implementation dependency.hilt.implementation
     kapt dependency.hilt.kapt
+
+    implementation dependency.thirdParty.coilCompose
 
     testImplementation dependency.thirdParty.junit
     androidTestImplementation dependency.androidX.junit

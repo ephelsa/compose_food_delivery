@@ -20,7 +20,8 @@ def libVersion = [
 
         thirdParty: [
                 googleMaterial: '1.4.0',
-                junit         : '4.13.2'
+                junit         : '4.13.2',
+                coilCompose   : '1.3.2'
         ]
 ]
 
@@ -52,7 +53,8 @@ def dependency = [
 
         thirdParty: [
                 googleMaterial: "com.google.android.material:material:$libVersion.thirdParty.googleMaterial",
-                junit         : "junit:junit:$libVersion.thirdParty.junit"
+                junit         : "junit:junit:$libVersion.thirdParty.junit",
+                coilCompose   : "io.coil-kt:coil-compose:$libVersion.thirdParty.coilCompose"
         ]
 ]
 
