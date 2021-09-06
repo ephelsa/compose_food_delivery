@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import com.github.ephelsa.composefooddelivery.route.ComposeFoodDeliveryScreen
 import com.github.ephelsa.composefooddelivery.ui.details.DetailsScreen
+import com.github.ephelsa.composefooddelivery.ui.details.DetailsViewModel
 import com.github.ephelsa.composefooddelivery.ui.extras.NavigationFoodDeliveryBottomBar
 import com.github.ephelsa.composefooddelivery.ui.extras.UnderConstructionBody
 import com.github.ephelsa.composefooddelivery.ui.extras.UserFoodDeliveryToolbar
@@ -64,6 +65,7 @@ fun ComposeFoodDeliveryApp() {
 @Composable
 fun ComposeFoodDeliveryNavHost(navController: NavHostController, modifier: Modifier = Modifier) {
     val homeViewModel = viewModel<HomeViewModel>()
+    val detailsViewModel = viewModel<DetailsViewModel>()
 
     NavHost(
         navController = navController,
@@ -95,7 +97,9 @@ fun ComposeFoodDeliveryNavHost(navController: NavHostController, modifier: Modif
         }
 
         composable(ComposeFoodDeliveryScreen.Details.name) {
-            DetailsScreen()
+            DetailsScreen(detailsViewModel) {
+                navController.popBackStack()
+            }
         }
     }
 }

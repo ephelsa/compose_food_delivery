@@ -10,12 +10,15 @@
     <string name="sectionLabel_categories">Categories</string>
     <string name="sectionLabel_recommended">Recommended</string>
     <string name="sectionLabel_startingFrom">Starting From</string>
+    <string name="sectionLabel_ingredients">Ingredients</string>
 
     <string name="details_deliveryIn">Delivery in %d min</string>
 
     <string name="buttonLabel_addToCart">Add to Cart</string>
 
     <string name="empty_section">This section is empty (｡•́︿•̀｡)</string>
+    <string name="empty_description">No description provided</string>
+    <string name="empty_details">Information not found (｡•́︿•̀｡)</string>
 
     <string name="contentDescription_profile">Profile</string>
     <string name="contentDescription_filter">Filter</string>

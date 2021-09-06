@@ -1,5 +1,6 @@
 package com.github.ephelsa.composefooddelivery.ui.details
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
@@ -17,20 +19,25 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material.icons.rounded.KeyboardArrowLeft
-import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
+import coil.compose.rememberImagePainter
 import com.github.ephelsa.composefooddelivery.R
+import com.github.ephelsa.composefooddelivery.ui.extras.Loader
+import com.github.ephelsa.domain.Product
 import com.github.ephelsa.ui.button.SimpleIconButton
 import com.github.ephelsa.ui.card.CatalogImageCard
 import com.github.ephelsa.ui.card.IngredientCard
@@ -39,8 +46,11 @@ import com.github.ephelsa.ui.theme.HugeSpacing
 import com.github.ephelsa.ui.theme.LargeSpacing
 import com.github.ephelsa.ui.toolbar.ApplicationToolbar
 
+@ExperimentalAnimationApi
+@ExperimentalCoilApi
 @Composable
 fun DetailsScreen(
+    viewModel: DetailsViewModel,
     onBackClick: () -> Unit
 ) {
     val (isFavorite, setFavorite) = remember { mutableStateOf(false) }
@@ -59,7 +69,7 @@ fun DetailsScreen(
             Footer()
         }
     ) {
-        DetailsBody()
+        DetailsBody(viewModel)
     }
 }
 
@@ -92,24 +102,53 @@ private fun DetailsToolbar(
     )
 }
 
+@ExperimentalAnimationApi
+@ExperimentalCoilApi
 @Composable
-private fun DetailsBody() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = HugeSpacing)
-            .verticalScroll(rememberScrollState())
+private fun DetailsBody(
+    viewModel: DetailsViewModel,
+) {
+    val shouldLoad by viewModel.onLoadingDetails.collectAsState()
+    val details by viewModel.onDetails.collectAsState()
+
+    produceState(initialValue = null) {
+        viewModel.getDetails()
+    }
+
+    Loader(
+        isLoading = shouldLoad,
+        modifier = Modifier.fillMaxWidth()
     ) {
-        CatalogImageCard(Icons.Rounded.Lock, null)
-        Spacer(Modifier.height(ExtraHugeSpacing))
-        InfoSection()
-        Spacer(Modifier.height(ExtraHugeSpacing))
-        IngredientsSection()
+        if (details == null) {
+            Text(
+                text = "Information not found",
+                style = MaterialTheme.typography.body1,
+                color = MaterialTheme.colors.error
+            )
+        } else {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = HugeSpacing)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                CatalogImageCard(
+                    painter = rememberImagePainter(data = details!!.image),
+                    contentDescription = null
+                )
+                Spacer(Modifier.height(ExtraHugeSpacing))
+                InfoSection(details!!)
+                Spacer(Modifier.height(ExtraHugeSpacing))
+                IngredientsSection(details!!)
+            }
+        }
     }
 }
 
 @Composable
-private fun InfoSection() {
+private fun InfoSection(
+    details: Product
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
@@ -118,23 +157,23 @@ private fun InfoSection() {
     ) {
         Column {
             Text(
-                text = "Hamburger",
+                text = details.name,
                 style = MaterialTheme.typography.h5
             )
 
             Text(
-                text = stringResource(R.string.details_deliveryIn, 20),
+                text = stringResource(R.string.details_deliveryIn, details.expectedDelivery / 1_000_000),
                 style = MaterialTheme.typography.body2,
             )
 
             Text(
-                text = "This is our best burger",
+                text = details.description ?: stringResource(R.string.empty_description),
                 style = MaterialTheme.typography.body1
             )
         }
 
         Text(
-            text = "$19.99",
+            text = "$${details.price}",
             style = MaterialTheme.typography.h3,
             color = MaterialTheme.colors.primary,
             fontWeight = FontWeight.Normal
@@ -142,15 +181,18 @@ private fun InfoSection() {
     }
 }
 
+@ExperimentalCoilApi
 @Composable
-private fun IngredientsSection() {
+private fun IngredientsSection(
+    details: Product
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
     ) {
 
         Text(
-            text = "Ingredients",
+            text = stringResource(R.string.sectionLabel_ingredients),
             style = MaterialTheme.typography.h5
         )
 
@@ -159,14 +201,14 @@ private fun IngredientsSection() {
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(LargeSpacing)
         ) {
-            items(10) {
+            items(details.ingredients) {
                 IngredientCard(
-                    imageVector = Icons.Filled.Phone,
-                    text = "Phone",
+                    painter = rememberImagePainter(
+                        data = it.image
+                    ),
+                    text = it.name,
                     backgroundColor = MaterialTheme.colors.secondary
-                ) {
-
-                }
+                )
             }
         }
     }

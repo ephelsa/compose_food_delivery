@@ -54,6 +54,8 @@ class ProductRepositoryMock(
     }
 
     override suspend fun getProductDetails(productId: String): Product? {
+        delay(2_000)
+
         return products.find {
             productId == it.getRealID()
         }

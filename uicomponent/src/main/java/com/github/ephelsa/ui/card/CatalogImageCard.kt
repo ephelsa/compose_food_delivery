@@ -10,7 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import com.github.ephelsa.ui.theme.AquaHaze
@@ -20,9 +22,16 @@ fun CatalogImageCard(
     image: ImageVector,
     contentDescription: String?,
     backgroundColor: Color = AquaHaze
+) = CatalogImageCard(rememberVectorPainter(image), contentDescription, backgroundColor)
+
+@Composable
+fun CatalogImageCard(
+    painter: Painter,
+    contentDescription: String?,
+    backgroundColor: Color = AquaHaze
 ) {
     Image(
-        imageVector = image,
+        painter = painter,
         contentDescription = contentDescription,
         modifier = Modifier
             .fillMaxWidth()
@@ -35,6 +44,6 @@ fun CatalogImageCard(
 @Preview
 @Composable
 internal fun CatalogImageCardPreview() {
-    CatalogImageCard(Icons.Rounded.Lock , null)
+    CatalogImageCard(Icons.Rounded.Lock, null)
 }
 
