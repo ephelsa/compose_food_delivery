@@ -10,14 +10,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import coil.annotation.ExperimentalCoilApi
 import com.github.ephelsa.composefooddelivery.route.ComposeFoodDeliveryScreen
-import com.github.ephelsa.composefooddelivery.ui.extras.NavigationFoodDeliveryBottomBar
-import com.github.ephelsa.composefooddelivery.ui.extras.UserFoodDeliveryToolbar
-import com.github.ephelsa.composefooddelivery.ui.extras.UnderConstructionBody
 import com.github.ephelsa.composefooddelivery.ui.details.DetailsScreen
+import com.github.ephelsa.composefooddelivery.ui.extras.NavigationFoodDeliveryBottomBar
+import com.github.ephelsa.composefooddelivery.ui.extras.UnderConstructionBody
+import com.github.ephelsa.composefooddelivery.ui.extras.UserFoodDeliveryToolbar
 import com.github.ephelsa.composefooddelivery.ui.home.HomeBody
 import com.github.ephelsa.ui.theme.ComposeFoodDeliveryTheme
 
+@ExperimentalCoilApi
 @ExperimentalAnimationApi
 @Composable
 fun ComposeFoodDeliveryApp() {
