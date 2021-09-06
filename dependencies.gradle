@@ -14,7 +14,8 @@ def libVersion = [
         ],
 
         hilt      : [
-                root: '2.38.1'
+                root     : '2.38.1',
+                viewModel: '1.0.0-alpha01'
         ],
 
         thirdParty: [
@@ -42,9 +43,11 @@ def dependency = [
                 tooling   : "androidx.compose.ui:ui-tooling:$libVersion.compose.root"
         ],
 
-        hilt : [
-                implementation : "com.google.dagger:hilt-android:$libVersion.hilt.root",
-                kapt : "com.google.dagger:hilt-android-compiler:$libVersion.hilt.root"
+        hilt      : [
+                implementation: "com.google.dagger:hilt-android:$libVersion.hilt.root",
+                kapt          : "com.google.dagger:hilt-android-compiler:$libVersion.hilt.root",
+                viewModel     : "androidx.hilt:hilt-lifecycle-viewmodel:$libVersion.hilt.viewModel",
+                viewModelKapt : "androidx.hilt:hilt-compiler:$libVersion.hilt.viewModel"
         ],
 
         thirdParty: [

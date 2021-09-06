@@ -58,6 +58,8 @@ dependencies {
     implementation dependency.androidX.appcompat
     implementation dependency.thirdParty.googleMaterial
     implementation dependency.androidX.lifecycleRuntime
+    implementation dependency.hilt.viewModel
+    kapt dependency.hilt.viewModelKapt
     implementation dependency.hilt.implementation
     kapt dependency.hilt.kapt
 
