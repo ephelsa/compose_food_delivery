@@ -118,20 +118,29 @@ private fun IconButton(
             )
 
             if (number > 0) {
-                Text(
-                    text = number.toString(),
-                    fontSize = 12.sp,
-                    color = MaterialTheme.colors.surface,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier
-                        .padding(top = 2.dp)
-                        .sizeIn(minHeight = 15.dp, minWidth = 15.dp)
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colors.error),
-                    textAlign = TextAlign.Center
-                )
+                Notification(number)
             }
         }
+    }
+}
+
+@Composable
+private fun Notification(
+    number: Int
+) {
+    Box(
+        modifier = Modifier
+            .sizeIn(minWidth = 15.dp, minHeight = 15.dp)
+            .clip(CircleShape)
+            .background(MaterialTheme.colors.error),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = number.toString(),
+            fontSize = 10.sp,
+            color = MaterialTheme.colors.surface,
+            fontWeight = FontWeight.Bold,
+        )
     }
 }
 

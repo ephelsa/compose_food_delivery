@@ -12,7 +12,8 @@ data class Product(
     val ingredients: List<Ingredient>
 ) : ProductWithID {
 
-    override fun getRealID(): String = "${categoryType.name}_$id"
+    override val realID: String
+        get() = "${categoryType.name}_$id"
 
     fun toRecommended(): Recommended {
         return Recommended(

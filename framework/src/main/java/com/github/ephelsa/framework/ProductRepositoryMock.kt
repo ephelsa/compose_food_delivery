@@ -57,7 +57,7 @@ class ProductRepositoryMock(
         delay(2_000)
 
         return products.find {
-            productId == it.getRealID()
+            productId == it.realID
         }
     }
 }

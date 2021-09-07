@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.ephelsa.data.CategoryRepository
 import com.github.ephelsa.data.ProductRepository
+import com.github.ephelsa.data.ShoppingCartRepository
 import com.github.ephelsa.domain.Category
+import com.github.ephelsa.domain.ProductWithID
 import com.github.ephelsa.domain.Recommended
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -15,7 +17,8 @@ import kotlinx.coroutines.launch
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val categoryRepository: CategoryRepository,
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val shoppingCartRepository: ShoppingCartRepository
 ) : ViewModel() {
 
     private val loadingCategories: MutableStateFlow<Boolean> = MutableStateFlow(true)
@@ -52,6 +55,12 @@ class HomeViewModel @Inject constructor(
             loadingRecommended.emit(true)
             recommended.emit(productRepository.getRecommended(categoryType))
             loadingRecommended.emit(false)
+        }
+    }
+
+    fun addProduct(productWithID: ProductWithID) {
+        viewModelScope.launch {
+            shoppingCartRepository.addProducts(productWithID)
         }
     }
 }

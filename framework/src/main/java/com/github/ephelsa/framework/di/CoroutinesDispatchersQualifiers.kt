@@ -4,16 +4,16 @@ import javax.inject.Qualifier
 
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
-annotation class DefaultDispatcher
+internal annotation class DefaultDispatcher
 
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
-annotation class IODispatcher
+internal annotation class IODispatcher
 
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
-annotation class MainDispatcher
+internal annotation class MainDispatcher
 
 @Retention(AnnotationRetention.BINARY)
 @Qualifier
-annotation class MainImmediateDispatcher
+internal annotation class MainImmediateDispatcher

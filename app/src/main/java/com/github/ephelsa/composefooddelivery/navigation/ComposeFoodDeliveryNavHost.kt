@@ -30,7 +30,7 @@ fun ComposeFoodDeliveryNavHost(navController: NavHostController, modifier: Modif
             HomeBody(
                 viewModel = homeViewModel,
                 onRecommended = detailsViewModel::getDetails,
-                onAddProduct = { /* TODO */ },
+                onAddProduct = homeViewModel::addProduct,
                 navigate = { navController.navigate(it.name) }
             )
         }
@@ -62,7 +62,7 @@ fun ComposeFoodDeliveryNavHost(navController: NavHostController, modifier: Modif
                     navController.popBackStack()
 
                 },
-                onAddClick = { /* TODO */ }
+                onAddClick = detailsViewModel::addProduct
             )
         }
     }

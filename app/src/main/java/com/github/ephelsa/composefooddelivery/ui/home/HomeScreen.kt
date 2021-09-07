@@ -160,7 +160,6 @@ private fun RecommendedSection(
     onAddProduct: (ProductWithID) -> Unit,
     screen: (ComposeFoodDeliveryRouter) -> Unit,
 ) {
-    val context = LocalContext.current
     val shouldLoad by viewModel.onLoadingRecommended.collectAsState()
     val recommended by viewModel.onRecommended.collectAsState()
 

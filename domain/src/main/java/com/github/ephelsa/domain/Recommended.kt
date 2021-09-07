@@ -7,7 +7,8 @@ data class Recommended(
     val name: String,
     val price: Double,
     val isAvailable: Boolean
-): ProductWithID {
+) : ProductWithID {
 
-    override fun getRealID(): String = "${categoryType.name}_$id"
+    override val realID: String
+        get() = "${categoryType.name}_$id"
 }
