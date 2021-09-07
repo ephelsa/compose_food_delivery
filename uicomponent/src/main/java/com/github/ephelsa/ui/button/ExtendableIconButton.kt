@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
@@ -33,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,6 +48,7 @@ import com.github.ephelsa.ui.theme.PinkSwan
 fun ExtendableIconButton(
     imageVector: ImageVector,
     text: String,
+    number: Int = 0,
     isExtended: Boolean = false,
     iconColor: Color = PinkSwan,
     onClick: () -> Unit
@@ -56,7 +59,7 @@ fun ExtendableIconButton(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        IconButton(imageVector, text, isExtended, iconColor, onClick)
+        IconButton(imageVector, text, number, isExtended, iconColor, onClick)
         Spacer(Modifier.height(ExtraSmallSpacing))
         ExtendableText(isExtended, text)
     }
@@ -67,6 +70,7 @@ fun ExtendableIconButton(
 private fun IconButton(
     imageVector: ImageVector,
     contentDescription: String,
+    number: Int,
     isExtended: Boolean,
     iconColor: Color = PinkSwan,
     onClick: () -> Unit
@@ -93,22 +97,41 @@ private fun IconButton(
             )
         }
 
-        Icon(
-            imageVector = imageVector,
-            contentDescription = contentDescription,
-            modifier = Modifier
-                .size(ExpandableIcon)
-                .clip(CircleShape)
-                .clickable(
-                    onClick = onClick,
-                    role = Role.Button
+        Box(
+            contentAlignment = Alignment.TopStart
+        ) {
+            Icon(
+                imageVector = imageVector,
+                contentDescription = contentDescription,
+                modifier = Modifier
+                    .size(ExpandableIcon)
+                    .clip(CircleShape)
+                    .clickable(
+                        onClick = onClick,
+                        role = Role.Button
+                    )
+                    .background(
+                        color = if (isExtended) MaterialTheme.colors.primary else Color.Transparent,
+                    )
+                    .padding(MediumSpacing),
+                tint = if (isExtended) MaterialTheme.colors.surface else iconColor
+            )
+
+            if (number > 0) {
+                Text(
+                    text = number.toString(),
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colors.surface,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(top = 2.dp)
+                        .sizeIn(minHeight = 15.dp, minWidth = 15.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colors.error),
+                    textAlign = TextAlign.Center
                 )
-                .background(
-                    color = if (isExtended) MaterialTheme.colors.primary else Color.Transparent,
-                )
-                .padding(MediumSpacing),
-            tint = if (isExtended) MaterialTheme.colors.surface else iconColor
-        )
+            }
+        }
     }
 }
 
@@ -142,7 +165,9 @@ private const val CoverScale = 1.4f
 internal fun ExtendableIconButtonPreview() {
     ExtendableIconButton(
         imageVector = Icons.Rounded.Home,
-        text = "Home"
+        text = "Home",
+        number = 3,
+        isExtended = true
     ) {
 
     }
