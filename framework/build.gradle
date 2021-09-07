@@ -42,6 +42,10 @@ dependencies {
     implementation dependency.hilt.implementation
     kapt dependency.hilt.kapt
 
+    implementation dependency.androidX.roomRuntime
+    implementation dependency.androidX.roomKtx
+    kapt dependency.androidX.roomAnnotationProcessor
+
     testImplementation dependency.thirdParty.junit
     androidTestImplementation dependency.androidX.junit
 }
