@@ -36,6 +36,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.github.ephelsa.ui.theme.ExtraSmallSpacing
 import com.github.ephelsa.ui.theme.MediumSpacing
 import com.github.ephelsa.ui.theme.PinkSwan
@@ -126,7 +127,8 @@ private fun ExtendableText(
             text = text,
             style = MaterialTheme.typography.button,
             color = MaterialTheme.colors.primary,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            fontSize = 12.sp
         )
     }
 }
