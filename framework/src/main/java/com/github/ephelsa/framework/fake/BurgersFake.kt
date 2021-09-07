@@ -1,9 +1,9 @@
-package com.github.ephelsa.framework
+package com.github.ephelsa.framework.fake
 
 import com.github.ephelsa.domain.Category
 import com.github.ephelsa.domain.Product
 
-object BurgersMock {
+object BurgersFake {
     val RedRobinsAvocado = Product(
         id = "1",
         categoryType = Category.CategoryType.Burger,
@@ -14,13 +14,13 @@ object BurgersMock {
         isAvailable = true,
         expectedDelivery = 20_000_000,
         ingredients = listOf(
-            IngredientsMock.BurgerBread,
-            IngredientsMock.Tomato,
-            IngredientsMock.BurgerBeef,
-            IngredientsMock.Cheese,
-            IngredientsMock.Beacon,
-            IngredientsMock.Avocado,
-            IngredientsMock.Lettuce,
+            IngredientsFake.BurgerBread,
+            IngredientsFake.Tomato,
+            IngredientsFake.BurgerBeef,
+            IngredientsFake.Cheese,
+            IngredientsFake.Beacon,
+            IngredientsFake.Avocado,
+            IngredientsFake.Lettuce,
         )
     )
 
@@ -34,12 +34,12 @@ object BurgersMock {
         isAvailable = true,
         expectedDelivery = 15_000_000,
         ingredients = listOf(
-            IngredientsMock.BurgerBread,
-            IngredientsMock.Tomato,
-            IngredientsMock.BurgerBeef,
-            IngredientsMock.Cheese,
-            IngredientsMock.Onions,
-            IngredientsMock.Lettuce,
+            IngredientsFake.BurgerBread,
+            IngredientsFake.Tomato,
+            IngredientsFake.BurgerBeef,
+            IngredientsFake.Cheese,
+            IngredientsFake.Onions,
+            IngredientsFake.Lettuce,
         )
     )
 
@@ -53,12 +53,12 @@ object BurgersMock {
         isAvailable = true,
         expectedDelivery = 30_000_000,
         ingredients = listOf(
-            IngredientsMock.BurgerBread,
-            IngredientsMock.Tomato,
-            IngredientsMock.BurgerBeef,
-            IngredientsMock.Cheese,
-            IngredientsMock.Onions,
-            IngredientsMock.Lettuce,
+            IngredientsFake.BurgerBread,
+            IngredientsFake.Tomato,
+            IngredientsFake.BurgerBeef,
+            IngredientsFake.Cheese,
+            IngredientsFake.Onions,
+            IngredientsFake.Lettuce,
         )
     )
 }

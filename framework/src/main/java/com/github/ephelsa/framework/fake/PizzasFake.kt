@@ -1,9 +1,9 @@
-package com.github.ephelsa.framework
+package com.github.ephelsa.framework.fake
 
 import com.github.ephelsa.domain.Category
 import com.github.ephelsa.domain.Product
 
-object PizzasMock {
+object PizzasFake {
     val Napolitana = Product(
         id = "1",
         categoryType = Category.CategoryType.Pizza,
@@ -14,9 +14,9 @@ object PizzasMock {
         isAvailable = true,
         expectedDelivery = 32_000_000,
         ingredients = listOf(
-            IngredientsMock.Tomato,
-            IngredientsMock.Cheese,
-            IngredientsMock.Basil,
+            IngredientsFake.Tomato,
+            IngredientsFake.Cheese,
+            IngredientsFake.Basil,
         )
     )
 }

@@ -1,8 +1,8 @@
-package com.github.ephelsa.framework
+package com.github.ephelsa.framework.fake
 
 import com.github.ephelsa.domain.Ingredient
 
-object IngredientsMock {
+object IngredientsFake {
     val Tomato = Ingredient(
         name = "Tomato",
         image = "https://stoller.com.gt/bz/wp-content/uploads/2019/05/tomate2.png",

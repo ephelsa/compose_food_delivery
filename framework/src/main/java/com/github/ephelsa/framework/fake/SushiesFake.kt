@@ -1,9 +1,9 @@
-package com.github.ephelsa.framework
+package com.github.ephelsa.framework.fake
 
 import com.github.ephelsa.domain.Category
 import com.github.ephelsa.domain.Product
 
-object SushiesMock {
+object SushiesFake {
 
     val Octopussy = Product(
         id = "1",
@@ -15,9 +15,9 @@ object SushiesMock {
         isAvailable = true,
         expectedDelivery = 45_000_000,
         ingredients = listOf(
-            IngredientsMock.Fish,
-            IngredientsMock.Rice,
-            IngredientsMock.Avocado,
+            IngredientsFake.Fish,
+            IngredientsFake.Rice,
+            IngredientsFake.Avocado,
         )
     )
 
@@ -31,10 +31,10 @@ object SushiesMock {
         isAvailable = true,
         expectedDelivery = 65_000_000,
         ingredients = listOf(
-            IngredientsMock.Fish,
-            IngredientsMock.Rice,
-            IngredientsMock.Avocado,
-            IngredientsMock.Tomato
+            IngredientsFake.Fish,
+            IngredientsFake.Rice,
+            IngredientsFake.Avocado,
+            IngredientsFake.Tomato
         )
     )
 }
