@@ -5,6 +5,7 @@ def libVersion = [
                 lifecycle   : '2.3.1',
                 junit       : '1.1.3',
                 espressoCore: '3.4.0',
+                room        : '2.3.0'
         ],
 
         compose   : [
@@ -21,17 +22,21 @@ def libVersion = [
         thirdParty: [
                 googleMaterial: '1.4.0',
                 junit         : '4.13.2',
-                coilCompose   : '1.3.2'
+                coilCompose   : '1.3.2',
+                coroutinesKtx : '1.5.2-native-mt'
         ]
 ]
 
 def dependency = [
         androidX  : [
-                coreKtx         : "androidx.core:core-ktx:$libVersion.androidX.coreKtx",
-                appcompat       : "androidx.appcompat:appcompat:$libVersion.androidX.appcompat",
-                lifecycleRuntime: "androidx.lifecycle:lifecycle-runtime-ktx:$libVersion.androidX.lifecycle",
-                junit           : "androidx.test.ext:junit:$libVersion.androidX.junit",
-                espressoCore    : "androidx.test.espresso:espresso-core:$libVersion.androidX.espressoCore"
+                coreKtx                : "androidx.core:core-ktx:$libVersion.androidX.coreKtx",
+                appcompat              : "androidx.appcompat:appcompat:$libVersion.androidX.appcompat",
+                lifecycleRuntime       : "androidx.lifecycle:lifecycle-runtime-ktx:$libVersion.androidX.lifecycle",
+                junit                  : "androidx.test.ext:junit:$libVersion.androidX.junit",
+                espressoCore           : "androidx.test.espresso:espresso-core:$libVersion.androidX.espressoCore",
+                roomRuntime            : "androidx.room:room-runtime:$libVersion.androidX.room",
+                roomAnnotationProcessor: "androidx.room:room-compiler:$libVersion.androidX.room",
+                roomKtx                : "androidx.room:room-ktx:$libVersion.androidX.room"
         ],
 
         compose   : [
@@ -54,7 +59,8 @@ def dependency = [
         thirdParty: [
                 googleMaterial: "com.google.android.material:material:$libVersion.thirdParty.googleMaterial",
                 junit         : "junit:junit:$libVersion.thirdParty.junit",
-                coilCompose   : "io.coil-kt:coil-compose:$libVersion.thirdParty.coilCompose"
+                coilCompose   : "io.coil-kt:coil-compose:$libVersion.thirdParty.coilCompose",
+                coroutinesKtx : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$libVersion.thirdParty.coroutinesKtx"
         ]
 ]
 
