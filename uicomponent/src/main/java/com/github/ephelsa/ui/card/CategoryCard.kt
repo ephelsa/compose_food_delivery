@@ -1,5 +1,6 @@
 package com.github.ephelsa.ui.card
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,11 +23,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -64,29 +62,28 @@ fun CategoryCard(
             .size(CardWidth, CardHeight)
             .clip(MaterialTheme.shapes.large)
             .background(boxColor)
-            .drawBehind {
-                val yOffset = size.height - (IconBoxSize.value * 1.3f)
-                val yEnd = yOffset - 96f
-                val ovalWidth = 80f
-                val ovalSize = Size(ovalWidth, 90f)
-
-                val innerPath = Path().apply {
-                    val innerYOffset = yOffset - 50f
-
-                    moveTo(0f, innerYOffset)
-                    arcTo(Rect(Offset(size.width / 2, yOffset), IconBoxSize.value * 1.9f), -160f, 140f, false)
-                    lineTo(size.width, innerYOffset)
-                    lineTo(size.width, size.height)
-                    lineTo(0f, size.height)
-                    close()
-                }
-
-                drawPath(innerPath, surfaceColor)
-                drawOval(boxColor, Offset(0f, yEnd), ovalSize)
-                drawOval(boxColor, Offset(size.width - ovalWidth, yEnd), ovalSize)
-            }
             .clickable(onClick = onClick)
     ) {
+        Canvas(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            // Center oval
+            val circleRadius = IconBoxSize.value * 1.4f
+            drawCircle(
+                color = surfaceColor,
+                radius = IconBoxSize.value * 1.6f,
+                center = Offset(size.width / 2f, size.height - circleRadius)
+            )
+
+            // Rectangle cut
+            val rectangleHeight = size.height / 10f
+            drawRect(
+                color = surfaceColor,
+                topLeft = Offset(0f, size.height - rectangleHeight),
+                size = Size(size.width, rectangleHeight)
+            )
+        }
         CategoryCardContent(text, painter, isSelected)
     }
 }
