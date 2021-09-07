@@ -30,6 +30,7 @@ fun ComposeFoodDeliveryNavHost(navController: NavHostController, modifier: Modif
             HomeBody(
                 viewModel = homeViewModel,
                 onRecommended = detailsViewModel::getDetails,
+                onAddProduct = { /* TODO */ },
                 navigate = { navController.navigate(it.name) }
             )
         }
@@ -55,9 +56,14 @@ fun ComposeFoodDeliveryNavHost(navController: NavHostController, modifier: Modif
         }
 
         composable(ComposeFoodDeliveryRouter.Details.name) {
-            DetailsScreen(detailsViewModel) {
-                navController.popBackStack()
-            }
+            DetailsScreen(
+                viewModel = detailsViewModel,
+                onBackClick = {
+                    navController.popBackStack()
+
+                },
+                onAddClick = { /* TODO */ }
+            )
         }
     }
 }

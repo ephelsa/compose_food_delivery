@@ -1,6 +1,5 @@
 package com.github.ephelsa.composefooddelivery.ui.home
 
-import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -48,6 +47,7 @@ import com.github.ephelsa.ui.theme.LargeSpacing
 fun HomeBody(
     viewModel: HomeViewModel,
     onRecommended: (ProductWithID) -> Unit,
+    onAddProduct: (ProductWithID) -> Unit,
     navigate: (ComposeFoodDeliveryRouter) -> Unit
 ) {
     val (categoryType, setCategoryType) = rememberSaveable { mutableStateOf<Category.CategoryType?>(null) }
@@ -71,7 +71,7 @@ fun HomeBody(
             }
         }
         Spacer(Modifier.height(ExtraHugeSpacing))
-        RecommendedSection(viewModel, onRecommended, navigate)
+        RecommendedSection(viewModel, onRecommended, onAddProduct, navigate)
     }
 }
 
@@ -157,7 +157,8 @@ private fun CategorySection(
 private fun RecommendedSection(
     viewModel: HomeViewModel,
     onRecommended: (ProductWithID) -> Unit,
-    screen: (ComposeFoodDeliveryRouter) -> Unit
+    onAddProduct: (ProductWithID) -> Unit,
+    screen: (ComposeFoodDeliveryRouter) -> Unit,
 ) {
     val context = LocalContext.current
     val shouldLoad by viewModel.onLoadingRecommended.collectAsState()
@@ -197,9 +198,7 @@ private fun RecommendedSection(
                                 onRecommended(it)
                                 screen(ComposeFoodDeliveryRouter.Details)
                             },
-                            onAdd = {
-                                Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show()
-                            }
+                            onAdd = { onAddProduct(it) }
                         )
                     }
                 }

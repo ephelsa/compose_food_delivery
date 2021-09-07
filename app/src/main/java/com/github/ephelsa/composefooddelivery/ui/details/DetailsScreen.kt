@@ -38,6 +38,7 @@ import coil.compose.rememberImagePainter
 import com.github.ephelsa.composefooddelivery.R
 import com.github.ephelsa.composefooddelivery.ui.extras.Loader
 import com.github.ephelsa.domain.Product
+import com.github.ephelsa.domain.ProductWithID
 import com.github.ephelsa.ui.button.SimpleIconButton
 import com.github.ephelsa.ui.card.CatalogImageCard
 import com.github.ephelsa.ui.card.IngredientCard
@@ -52,9 +53,12 @@ import com.github.ephelsa.ui.toolbar.ApplicationToolbar
 @Composable
 fun DetailsScreen(
     viewModel: DetailsViewModel,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onAddClick: (ProductWithID) -> Unit
 ) {
     val (isFavorite, setFavorite) = remember { mutableStateOf(false) }
+    val shouldLoad by viewModel.onLoadingDetails.collectAsState()
+    val details by viewModel.onDetails.collectAsState()
 
     Scaffold(
         topBar = {
@@ -67,11 +71,16 @@ fun DetailsScreen(
             )
         },
         bottomBar = {
-            Footer()
+            Footer(
+                isLoading = shouldLoad,
+                details = details,
+                onAddClick = onAddClick
+            )
         }
     ) { paddings ->
         DetailsBody(
-            viewModel = viewModel,
+            isLoading = shouldLoad,
+            details = details,
             modifier = Modifier
                 .padding(
                     top = paddings.calculateTopPadding(),
@@ -114,14 +123,12 @@ private fun DetailsToolbar(
 @ExperimentalCoilApi
 @Composable
 private fun DetailsBody(
-    viewModel: DetailsViewModel,
+    isLoading: Boolean,
+    details: Product?,
     modifier: Modifier,
 ) {
-    val shouldLoad by viewModel.onLoadingDetails.collectAsState()
-    val details by viewModel.onDetails.collectAsState()
-
     Loader(
-        isLoading = shouldLoad,
+        isLoading = isLoading,
         modifier = modifier.fillMaxWidth()
     ) {
         if (details == null) {
@@ -138,13 +145,13 @@ private fun DetailsBody(
                     .verticalScroll(rememberScrollState())
             ) {
                 CatalogImageCard(
-                    painter = rememberImagePainter(data = details!!.image),
+                    painter = rememberImagePainter(data = details.image),
                     contentDescription = null
                 )
                 Spacer(Modifier.height(ExtraHugeSpacing))
-                InfoSection(details!!)
+                InfoSection(details)
                 Spacer(Modifier.height(ExtraHugeSpacing))
-                IngredientsSection(details!!)
+                IngredientsSection(details)
             }
         }
     }
@@ -225,15 +232,21 @@ private fun IngredientsSection(
     }
 }
 
+@ExperimentalAnimationApi
 @Composable
-private fun Footer() {
+private fun Footer(
+    isLoading: Boolean,
+    details: Product?,
+    onAddClick: (ProductWithID) -> Unit,
+) {
     Button(
-        onClick = { /*TODO*/ },
+        onClick = { details?.let(onAddClick) },
         modifier = Modifier
             .fillMaxWidth()
             .padding(HugeSpacing)
             .height(BottomHeight),
-        shape = CircleShape
+        shape = CircleShape,
+        enabled = !isLoading
     ) {
         Text(text = stringResource(R.string.buttonLabel_addToCart))
     }
